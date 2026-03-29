@@ -11,6 +11,9 @@ namespace BookShop.Models
 		[MaxLength(40)]
 		public string? BookName{ get; set; }
 		[Required]
+		[MaxLength(40)]
+		public string? AuthorName { get; set; }
+		[Required]
 		public double Price{ get; set; }
 		[Required]
 		public int GenreId{ get; set; }
@@ -18,5 +21,8 @@ namespace BookShop.Models
 		public Genre Genre { get; set; }
 		public List<OrderDetail> OrderDetails { get; set; }
 		public List<CartDetails> CartDetails { get; set; }
+		[NotMapped]
+		public string GenreName { get; set; }
+		public Stock Stock { get; set; }
 	}
 }

@@ -14,11 +14,11 @@ namespace BookShop.Data
 
 	public DbSet<Book> Books { get; set; }
 	public DbSet<CartDetails> CartDetails { get; set; }
-		public DbSet<Genre> Genres { get; set; }
-		public DbSet<Order> Orders { get; set; }
-		public DbSet<OrderDetail> OrderDetails { get; set; }
-		public DbSet<OrderStatus> orderStatuses{ get; set; }
-		public DbSet<ShoppingCart> ShoppingCarts{ get; set; }
+	public DbSet<Genre> Genres { get; set; }
+	public DbSet<Order> Orders { get; set; }
+	public DbSet<OrderDetail> OrderDetails { get; set; }
+	public DbSet<OrderStatus> orderStatuses{ get; set; }
+	public DbSet<ShoppingCart> ShoppingCarts{ get; set; }
 
 	}
 }

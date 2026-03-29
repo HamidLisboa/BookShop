@@ -10,5 +10,6 @@ namespace BookShop.Models
 		[Required]
 		public string UserId { get; set; }
 		public bool isDeleted { get; set; } = false;
+		public ICollection<CartDetails> CartDetails { get; set; }
 	}
 }

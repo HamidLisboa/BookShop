@@ -14,6 +14,7 @@ namespace BookShop.Models
 		public int BookId { get; set; }
 		[Required]
 		public int Quantity { get; set; }
+		public double Price { get; set; }
 		public Book Book { get; set; }
 		public ShoppingCart ShoppingCart { get; set; }
 	}
