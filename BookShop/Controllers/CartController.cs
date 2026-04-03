@@ -4,9 +4,33 @@ namespace BookShop.Controllers
 {
 	public class CartController : Controller
 	{
-		public IActionResult Index()
+		private readonly ICartRepository _cartRepository;
+
+		public CartController(ICartRepository cartRepository)
 		{
-			return View();
+			_cartRepository = cartRepository;
+		}
+		public async Task<IActionResult> AddItemtoCart(int bookId, int quantity, int redirect=0)
+		{
+			var cartCount= await _cartRepository.AddItemToCart(bookId, quantity);
+			if (cartCount == 0)
+				return Ok(cartCount);
+			return RedirectToAction("GetUserCart");
+		}
+		public async Task<IActionResult> RemoveItemfromCart(int bookId)
+		{
+			var cartCount = await _cartRepository.RemoveItemFromCart(bookId);
+			return RedirectToAction("GetUserCart");
+		}
+		public async Task<IActionResult> GetUserCart()
+		{
+			var cart = await _cartRepository.GetUserCart();
+			return View(cart);
+		}
+		public async Task<IActionResult> GetTotalItems()
+		{
+			int cartItems = await _cartRepository.GetCartItemsCount();
+			return Ok(cartItems);
 		}
 	}
 }
