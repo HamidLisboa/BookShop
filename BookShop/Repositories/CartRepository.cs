@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookShop.Models.Repositories
+namespace BookShop.Repositories
 {
-	public class CartRepository
+	public class CartRepository : ICartRepository
 	{
 		private readonly ApplicationDbContext _dbcontext;
 		private readonly IHttpContextAccessor _httpContextAccessor;
@@ -16,12 +16,12 @@ namespace BookShop.Models.Repositories
 			_httpContextAccessor = httpContextAccessor;
 			_userManager = userManager;
 		}
-		public async Task<int> AddItemToCart(int bookId, int quantity)
+		public async Task<int> AddItemToCart(int bookId, int quantity = 1)
 		{
 			string userId = GetUserId();
 			using var transaction = await _dbcontext.Database.BeginTransactionAsync();
 			try
-			{ 
+			{
 				if (string.IsNullOrEmpty(userId))
 					throw new UnauthorizedAccessException("User is not authenticated.");
 				var cart = await GetCart(userId);
@@ -29,7 +29,7 @@ namespace BookShop.Models.Repositories
 				{
 					cart = new ShoppingCart
 					{
-						UserId = userId						
+						UserId = userId
 					};
 					_dbcontext.ShoppingCarts.Add(cart);
 				}
@@ -54,19 +54,21 @@ namespace BookShop.Models.Repositories
 				_dbcontext.SaveChanges();
 				transaction.Commit();
 			}
-			
+
 			catch
 			{
 				await transaction.RollbackAsync();
 				throw;
 			}
-			return 0;
-			
+			// return the updated cart items count for the user
+			var itemCartCount = await GetCartItemsCount(userId);
+			return itemCartCount;
+
 		}
 		public async Task<int> RemoveItemFromCart(int bookId)
 		{
 			string userId = GetUserId();
-			
+
 			try
 			{
 				if (string.IsNullOrEmpty(userId))
@@ -86,14 +88,14 @@ namespace BookShop.Models.Repositories
 
 				await _dbcontext.SaveChangesAsync();
 			}
-			
+
 			catch
 			{
-				
+
 			}
 			var itemCartCount = await GetCartItemsCount(userId);
 			return itemCartCount;
-			
+
 		}
 		public async Task<ShoppingCart> GetUserCart()
 		{
@@ -104,10 +106,10 @@ namespace BookShop.Models.Repositories
 									Include(x => x.CartDetails)
 									.ThenInclude(x => x.Book)
 									.ThenInclude(x => x.Stock)
-									.Include(x=>x.CartDetails)
-									.ThenInclude(x=>x.Book)
-									.ThenInclude(x=>x.Genre)
-									.Where(x=>x.UserId == userId).FirstOrDefaultAsync();
+									.Include(x => x.CartDetails)
+									.ThenInclude(x => x.Book)
+									.ThenInclude(x => x.Genre)
+									.Where(x => x.UserId == userId).FirstOrDefaultAsync();
 			return shoppingCart;
 		}
 		public async Task<ShoppingCart> GetCart(string userId)

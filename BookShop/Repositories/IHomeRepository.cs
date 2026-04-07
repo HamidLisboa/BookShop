@@ -1,4 +1,4 @@
-﻿namespace BookShop.Models.Repositories
+﻿namespace BookShop.Repositories
 {
 	public interface IHomeRepository
 	{

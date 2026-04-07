@@ -4,26 +4,26 @@
 
 namespace BookShop.Data.Migrations
 {
-    /// <inheritdoc />
-    public partial class pricedetails : Migration
-    {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<double>(
-                name: "Price",
-                table: "CartDetail",
-                type: "float",
-                nullable: false,
-                defaultValue: 0.0);
-        }
+	/// <inheritdoc />
+	public partial class pricedetails : Migration
+	{
+		/// <inheritdoc />
+		protected override void Up(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.AddColumn<double>(
+				name: "Price",
+				table: "CartDetail",
+				type: "float",
+				nullable: false,
+				defaultValue: 0.0);
+		}
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "Price",
-                table: "CartDetail");
-        }
-    }
+		/// <inheritdoc />
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropColumn(
+				name: "Price",
+				table: "CartDetail");
+		}
+	}
 }

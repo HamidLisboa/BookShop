@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookShop.Models
 {
-[Table("OrderDetail")]
+	[Table("OrderDetail")]
 	public class OrderDetail
 	{
-		public int id{ get; set; }
+		public int id { get; set; }
 		[Required]
 		public int OrderId { get; set; }
 		[Required]
@@ -14,8 +14,8 @@ namespace BookShop.Models
 		[Required]
 		public int Quantity { get; set; }
 		[Required]
-		public double UnitPrice{ get; set; }
+		public double UnitPrice { get; set; }
 		public Order Order { get; set; }
-		public Book Book{ get; set; }
+		public Book Book { get; set; }
 	}
 }

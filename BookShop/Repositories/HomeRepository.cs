@@ -1,9 +1,8 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BookShop.Models.Repositories
+namespace BookShop.Repositories
 {
-	public class HomeRepository:IHomeRepository
+	public class HomeRepository : IHomeRepository
 	{
 		private readonly ApplicationDbContext _context;
 		public HomeRepository(ApplicationDbContext context)
@@ -14,7 +13,7 @@ namespace BookShop.Models.Repositories
 		{
 			return await _context.Genres.ToListAsync();
 		}
-		public async Task<IEnumerable<Book>> GetBooks(string searchTerm="", int genreId=0)
+		public async Task<IEnumerable<Book>> GetBooks(string searchTerm = "", int genreId = 0)
 		{
 			var bookQuery = _context.Books
 			   .AsNoTracking()

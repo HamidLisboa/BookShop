@@ -35,12 +35,11 @@
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
                     </li> *@
-                </ul>                
+                    
+                </ul>       
+                
                 <partial name="_LoginPartial" />
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                
             </div>
         </div>
     </nav>
@@ -48,10 +47,10 @@
         @RenderBody()
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script>
 
-</script>
+   
+
 </html>
-@await RenderSectionAsync("Scripts", required: false)
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
+@await RenderSectionAsync("Scripts", required: false)

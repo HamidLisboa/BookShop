@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookShop.Models
 {
-[Table("CartDetail")]
+	[Table("CartDetail")]
 	public class CartDetails
 	{
 		public int id { get; set; }
-		
+
 		[Required]
 		public int ShoppingCartId { get; set; }
 		[Required]

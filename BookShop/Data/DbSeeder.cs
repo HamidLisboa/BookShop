@@ -1,6 +1,4 @@
 ﻿using BookShop.Constants;
-using BookShop.Data;
-using BookShop.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -66,15 +64,15 @@ public class DbSeeder
 			//	await SeedBooksAsync(context);
 			//	// update stock table
 			//	await context.Database.ExecuteSqlRawAsync(@"
-   //                  INSERT INTO Stock(BookId,Quantity) 
-   //                  SELECT 
-   //                  b.Id,
-   //                  10 
-   //                  FROM Book b
-   //                  WHERE NOT EXISTS (
-   //                  SELECT * FROM [Stock]
-   //                  );
-   //        ");
+			//                  INSERT INTO Stock(BookId,Quantity) 
+			//                  SELECT 
+			//                  b.Id,
+			//                  10 
+			//                  FROM Book b
+			//                  WHERE NOT EXISTS (
+			//                  SELECT * FROM [Stock]
+			//                  );
+			//        ");
 			//}
 
 			//if (!context.orderStatuses.Any())
@@ -126,43 +124,43 @@ public class DbSeeder
 	//{
 	//	var books = new List<Book>
 	//	{
- //           // Romance Books (GenreId = 1)
- //           new Book { BookName = "Pride and Prejudice", AuthorName = "Jane Austen", Price = 12.99, GenreId = 1 },
+	//           // Romance Books (GenreId = 1)
+	//           new Book { BookName = "Pride and Prejudice", AuthorName = "Jane Austen", Price = 12.99, GenreId = 1 },
 	//		new Book { BookName = "The Notebook", AuthorName = "Nicholas Sparks", Price = 11.99, GenreId = 1 },
 	//		new Book { BookName = "Outlander", AuthorName = "Diana Gabaldon", Price = 14.99, GenreId = 1 },
 	//		new Book { BookName = "Me Before You", AuthorName = "Jojo Moyes", Price = 10.99, GenreId = 1 },
 	//		new Book { BookName = "The Fault in Our Stars", AuthorName = "John Green", Price = 9.99, GenreId = 1 },
-            
- //           // Action Books (GenreId = 2)
- //           new Book { BookName = "The Bourne Identity", AuthorName = "Robert Ludlum", Price = 14.99, GenreId = 2 },
+
+	//           // Action Books (GenreId = 2)
+	//           new Book { BookName = "The Bourne Identity", AuthorName = "Robert Ludlum", Price = 14.99, GenreId = 2 },
 	//		new Book { BookName = "Die Hard", AuthorName = "Roderick Thorp", Price = 13.99, GenreId = 2 },
 	//		new Book { BookName = "Jurassic Park", AuthorName = "Michael Crichton", Price = 15.99, GenreId = 2 },
 	//		new Book { BookName = "The Da Vinci Code", AuthorName = "Dan Brown", Price = 12.99, GenreId = 2 },
 	//		new Book { BookName = "The Hunger Games", AuthorName = "Suzanne Collins", Price = 11.99, GenreId = 2 },
-            
- //           // Thriller Books (GenreId = 3)
- //           new Book { BookName = "Gone Girl", AuthorName = "Gillian Flynn", Price = 11.99, GenreId = 3 },
+
+	//           // Thriller Books (GenreId = 3)
+	//           new Book { BookName = "Gone Girl", AuthorName = "Gillian Flynn", Price = 11.99, GenreId = 3 },
 	//		new Book { BookName = "The Girl with the Dragon Tattoo", AuthorName = "Stieg Larsson", Price = 10.99, GenreId = 3 },
 	//		new Book { BookName = "The Silence of the Lambs", AuthorName = "Thomas Harris", Price = 12.99, GenreId = 3 },
 	//		new Book { BookName = "Before I Go to Sleep", AuthorName = "S.J. Watson", Price = 9.99, GenreId = 3 },
 	//		new Book { BookName = "The Girl on the Train", AuthorName = "Paula Hawkins", Price = 13.99, GenreId = 3 },
-            
- //           // Crime Books (GenreId = 4)
- //           new Book { BookName = "The Godfather", AuthorName = "Mario Puzo", Price = 13.99, GenreId = 4 },
+
+	//           // Crime Books (GenreId = 4)
+	//           new Book { BookName = "The Godfather", AuthorName = "Mario Puzo", Price = 13.99, GenreId = 4 },
 	//		new Book { BookName = "The Girl with the Dragon Tattoo", AuthorName = "Stieg Larsson", Price = 12.99, GenreId = 4 },
 	//		new Book { BookName = "The Cuckoo's Calling", AuthorName = "Robert Galbraith", Price = 14.99, GenreId = 4 },
 	//		new Book { BookName = "In Cold Blood", AuthorName = "Truman Capote", Price = 11.99, GenreId = 4 },
 	//		new Book { BookName = "The Silence of the Lambs", AuthorName = "Thomas Harris", Price = 15.99, GenreId = 4 },
-            
- //           // SelfHelp Books (GenreId = 5)
- //           new Book { BookName = "The 7 Habits of Highly Effective People", AuthorName = "Stephen R. Covey", Price = 9.99, GenreId = 5 },
+
+	//           // SelfHelp Books (GenreId = 5)
+	//           new Book { BookName = "The 7 Habits of Highly Effective People", AuthorName = "Stephen R. Covey", Price = 9.99, GenreId = 5 },
 	//		new Book { BookName = "How to Win Friends and Influence People", AuthorName = "Dale Carnegie", Price = 8.99, GenreId = 5 },
 	//		new Book { BookName = "Atomic Habits", AuthorName = "James Clear", Price = 10.99, GenreId = 5 },
 	//		new Book { BookName = "The Subtle Art of Not Giving a F*ck", AuthorName = "Mark Manson", Price = 7.99, GenreId = 5 },
 	//		new Book { BookName = "You Are a Badass", AuthorName = "Jen Sincero", Price = 11.99, GenreId = 5 },
-            
- //           // Programming Books (GenreId = 6)
- //           new Book { BookName = "Clean Code", AuthorName = "Robert C. Martin", Price = 19.99, GenreId = 6 },
+
+	//           // Programming Books (GenreId = 6)
+	//           new Book { BookName = "Clean Code", AuthorName = "Robert C. Martin", Price = 19.99, GenreId = 6 },
 	//		new Book { BookName = "Design Patterns", AuthorName = "Erich Gamma", Price = 17.99, GenreId = 6 },
 	//		new Book { BookName = "Code Complete", AuthorName = "Steve McConnell", Price = 21.99, GenreId = 6 },
 	//		new Book { BookName = "The Pragmatic Programmer", AuthorName = "Andrew Hunt", Price = 18.99, GenreId = 6 },
