@@ -10,7 +10,7 @@ namespace BookShop.Controllers
 		{
 			_cartRepository = cartRepository;
 		}
-		public async Task<IActionResult> AddItemtoCart(int bookId, int quantity = 0, int redirect = 0)
+		public async Task<IActionResult> AddItemtoCart(int bookId, int quantity = 1, int redirect = 0)
 		{
 
 			var cartCount = await _cartRepository.AddItemToCart(bookId, quantity);

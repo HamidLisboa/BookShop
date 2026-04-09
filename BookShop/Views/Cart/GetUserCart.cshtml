@@ -1,0 +1,103 @@
+﻿@model BookShop.Models.ShoppingCart
+ 
+
+@{
+    ViewData["Title"] = "User Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Your Cart</h1>
+
+@if (@Model.CartDetails == null || !@Model.CartDetails.Any() || @Model.CartDetails.Count==0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{       
+<table class="table table-sm text-center align-middle">
+    <thead>
+        <tr>
+            <th>
+                Book Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Total Price
+            </th>
+            <th>
+                Image
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.CartDetails) {
+        <tr>
+            <td>
+                <span>@item.Book.BookName</span>
+            </td>
+            <td>
+                <span class="price" id="price-@item.BookId">@item.Price</span>
+            </td>
+            <td>
+                @if(item.Quantity>1)
+                {
+                    <a type="button" class="btn btn-sm" href="/Cart/RemoveItemfromCart?bookId=@item.BookId"><i class="bi bi-dash-circle"></i></a>
+                }
+                        else
+                        {
+                            <span><i class="bi bi-dash-circle text-danger" ></i></span>
+                        }
+                <span class="qty px-2" id="qty-@item.BookId">@item.Quantity</span>
+                @if (item.Quantity < item.Book.Stock.Quantity)
+                {
+                <a type="button" class="btn btn-sm" href="/Cart/AddItemtoCart?bookId=@item.BookId&&redirect=1"><i class="bi bi-plus-circle"></i></a>
+                }
+                else
+                {
+                            <span><i class="bi bi-x-circle text-danger"></i></span>
+                    <br />
+                    <span style="border:none;padding: 8px 8px;color: red;border-radius: 5px;margin-right:4px">Out of stock</span>
+                }           
+            </td>
+            <td>
+                <span>@item.Book.Genre?.GenreName</span>
+            </td>
+            <td>
+                <span>@item.Book.AuthorName</span>
+            </td>
+            <td>
+                        <span class="row-total" id="total-@item.BookId">@((decimal)(item.Price * item.Quantity))</span>
+            </td>
+            <td>
+                <img src="@item.Book.Image" style="height:80px;width:auto" class="mx-auto d-block" />
+            </td>
+            <td>
+                <a asp-action="RemoveItemfromCart" asp-route-bookId="@item.BookId">
+                    <i class="bi bi-trash3-fill"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+    <div class="my-2">
+        <h5>Total(Euros): </h5>
+        @(Model.CartDetails.Select(item => ((decimal)item.Book.Price) * item.Quantity).Sum())
+    </div>
+    <div class="my-2" href="#">
+        <button class="btn btn-primary">Checkout</button>
+    </div>
+}

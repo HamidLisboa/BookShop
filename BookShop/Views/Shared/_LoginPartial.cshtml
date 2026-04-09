@@ -18,10 +18,10 @@
 <ul class="navbar-nav">
 
     <li class="nav-item">
-        <button class="btn btn-danger" href="#">
+        <a class="btn btn-danger" href= "/Cart/GetUserCart">
             <span id="cartCount" class=" badge text-bg-danger">@initialCartCount</span>
             <i class="bi bi-cart text-white"></i>
-        </button>
+        </a>
     </li>
 @if (SignInManager.IsSignedIn(User))
 {

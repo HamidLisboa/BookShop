@@ -47,7 +47,7 @@
                     <h5 class="card-title">@book.BookName</h5>
                     <img src="@book.Image" class="mx-auto d-block img-fluid" alt="@book.BookName" style="height:100%; width:auto; object-fit:cover;">
                     <p class="card-text">Author: @book.AuthorName<br />Genre: @book.GenreName <br />Price: @book.Price €</p>
-                    <button type="button" onclick="add(@book.id)" class="btn btn-primary d-block mx-auto">+Add to Cart</button>
+                    <button type="button" onclick="add(@book.id)" class="btn btn-primary d-block mx-auto"><i class="bi bi-cart-plus"></i></button>
                 </div>
             </div>
         </div>
@@ -67,7 +67,6 @@
                     var result = await response.json();
                     var cartCountEl = document.getElementById("cartCount");
                     cartCountEl.innerHTML = result;
-                    window.location.href = "#cartCount";
                 }
             }
             catch (err) {

@@ -8,7 +8,7 @@ namespace BookShop.Models
 	{
 		public int id { get; set; }
 		[Required]
-		public int UserId { get; set; }
+		public string UserId { get; set; }
 		public DateTime CreatedDate { get; set; } = DateTime.Now;
 		[Required]
 		public int OrderId { get; set; }

@@ -135,6 +135,40 @@ namespace BookShop.Repositories
 			return userId;
 		}
 
+		public async Task Checkout()
+		{
+			string userId = GetUserId();
+			if (string.IsNullOrEmpty(userId))
+				throw new UnauthorizedAccessException("User is not authenticated.");
+			var cart = await GetCart(userId);
+			if (cart is null || cart.CartDetails.Count == 0)
+				throw new InvalidOperationException("Shopping cart is empty.");
+			var order = new Order
+			{
+				UserId = userId,
+				CreatedDate = DateTime.UtcNow,
 
+				OrderDetails = cart.CartDetails.Select(cd => new OrderDetail
+				{
+					BookId = cd.BookId,
+					Quantity = cd.Quantity,
+					UnitPrice = cd.Price
+				}).ToList()
+			};
+			using var transaction = await _dbcontext.Database.BeginTransactionAsync();
+			try
+			{
+				_dbcontext.Orders.Add(order);
+				_dbcontext.CartDetails.RemoveRange(cart.CartDetails);
+				await _dbcontext.SaveChangesAsync();
+				transaction.Commit();
+			}
+			catch
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
 	}
 }
+
