@@ -47,7 +47,7 @@ else
                 <span>@item.Book.BookName</span>
             </td>
             <td>
-                <span class="price" id="price-@item.BookId">@item.Price</span>
+                <span class="price" id="price-@item.BookId">@item.Price €</span>
             </td>
             <td>
                 @if(item.Quantity>1)
@@ -97,7 +97,7 @@ else
         <h5>Total(Euros): </h5>
         @(Model.CartDetails.Select(item => ((decimal)item.Book.Price) * item.Quantity).Sum())
     </div>
-    <div class="my-2" href="#">
-        <button class="btn btn-primary">Checkout</button>
+    <div class="my-2">
+        <a asp-controller="Cart" asp-action="Checkout" class="btn btn-primary">Checkout</a>
     </div>
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace BookShop.Controllers
 {
@@ -32,6 +33,28 @@ namespace BookShop.Controllers
 		{
 			int cartItems = await _cartRepository.GetCartItemsCount();
 			return Ok(cartItems);
+		}
+      public async Task<IActionResult> Checkout()
+		{
+			var orderDetail = await _cartRepository.Checkout(); 
+			if (orderDetail == null)
+				return NotFound();
+			return View(model: orderDetail);
+		}
+		[HttpPost]
+		public async Task<IActionResult> ShippingDatas(string address, string name, string paymentMethod)
+		{
+			var order = await _cartRepository.ShippingDatas(address, name, paymentMethod);
+			if (order == null)
+				return NotFound();
+			return View(model: order);
+		}
+		 public async Task<IActionResult> OrderConfirmation(int orderId)
+		{
+			var isConfirmed = await _cartRepository.OrderConfirmation(orderId);
+			if (!isConfirmed)
+				return BadRequest("Order confirmation failed.");
+			return View();
 		}
 	}
 }

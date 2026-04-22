@@ -1,0 +1,79 @@
+﻿@model BookShop.Models.Order
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="align-content-center">Order Details</h1>
+<div class="container col-md-12 flex-md-column">
+    <div class="row">
+<div class="col-md-6">
+<table class="table table-sm text-center align-middle w-75">
+    <thead>
+        <tr>
+            Order ID: @Model.OrderDetails.FirstOrDefault()?.OrderId @Model.OrderDetails.FirstOrDefault()?.Order.UserId
+         
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderDetails) {
+        <tr>
+           
+            <td>
+                <p>
+                    <img src="@item.Book.Image" alt="@item.Book.BookName" width="80"/>  
+                </p>
+            </td>
+             <td>
+                    @item.Book.BookName <br />
+                    Author: @item.Book.AuthorName
+             </td>
+             <td>
+                    @item.Quantity X @item.UnitPrice €
+             </td>
+        </tr>
+}
+    </tbody>
+    </table>
+</div>
+<div class="col-md-5">
+    <form asp-action="ShippingDatas" class="form-control my-2 mx-2" method="post" asp-antiforgery="true">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" asp-for="Name" id="name" placeholder="Type Your Name Here" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address:</label>
+                    <textarea class="form-control" asp-for="Address" id="address" rows="3" placeholder="Your Address" required></textarea>
+                </div>
+                <div id="RadioButtons">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="PaymentMethod" type="radio" value="MbWay" id="MbWay" checked>
+                    <label class="form-check-label" for="MbWay">
+                        MbWay
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="PaymentMethod" type="radio" value="CreditCard" id="CreditCard">
+                    <label class="form-check-label" for="CreditCard">
+                        Credit Card
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="PaymentMethod" type="radio" value="MultiBank" id="MultiBank">
+                    <label class="form-check-label" for="MultiBank">
+                        MultiBank
+                    </label>
+                </div>
+                </div> 
+                <button class="btn btn-primary" asp-controller="Cart" asp-action="GetUserCart">Back to Cart</button>
+                <button class="btn btn-success" type="submit" asp-controller="Cart" asp-action="ShippingDatas">Register</button>
+    </form>
+            <h5 class="mx-2 my-2">Total(Euros): @(Model.OrderDetails.Select(item => ((decimal)item.UnitPrice) * item.Quantity).Sum())</h5>
+           
+</div>
+    </div>
+    
+    </div>
+

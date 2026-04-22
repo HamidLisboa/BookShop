@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-BookShop-dbcc8f49-966d-45da-94f8-3e88cbc9666f</UserSecretsId>
+    <NoWarn>NU1901</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
